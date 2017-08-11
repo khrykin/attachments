@@ -1,0 +1,14 @@
+{
+  "name": "attachments-provider-plain",
+  "version": "0.0.0",
+  "description": "",
+  "main": "PlainProvider.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Dmitry Khrykin",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}

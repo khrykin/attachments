@@ -1,0 +1,26 @@
+{
+  "name": "attachments-provider-mongoose",
+  "version": "0.0.1",
+  "description": "Mongoose provider for attachments",
+  "main": "MongooseProvider.js",
+  "repository": "https://github.com/khrykin/attachments",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Dmitry Khrykin",
+  "license": "ISC",
+  "peerDependencies": {
+    "mongoose": "^4.11.6"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "jest": true
+    }
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "dependencies": {}
+}

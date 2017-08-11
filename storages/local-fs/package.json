@@ -1,0 +1,25 @@
+{
+  "name": "attachments-storage-local-fs",
+  "version": "0.0.1",
+  "description": "Local file system storage for attachments",
+  "main": "LocalFsStorage.js",
+  "repository": "https://github.com/khrykin/attachments",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Dmitry Khrykin",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^4.0.1"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "jest": true
+    }
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}

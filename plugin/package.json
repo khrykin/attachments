@@ -1,0 +1,22 @@
+{
+  "name": "attachments",
+  "version": "0.0.1",
+  "description": "Storage and model agnostic modular framework for hadling file attachments and preprocessing",
+  "main": "plugin.js",
+  "repository": "https://github.com/khrykin/attachments",
+  "scripts": {
+    "test": "jest plugin"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "jest": true
+    }
+  },
+  "author": "Dmitry Khrykin",
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
