@@ -227,11 +227,7 @@ module.exports = (publicBasepath, attributes) => createPlugin(
 // data/models/User.js
 const attachments = require('../attachments')
 
-class User extends Model {
-  static schema = {
-    name: String
-  }
-}
+const User = mongoose.model('User', schema)
 
 attachments({
   picture: {
