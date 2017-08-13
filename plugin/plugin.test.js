@@ -306,7 +306,7 @@ describe('AttachmentsPlugin', () => {
 
       try {
         await instance.attach('picture', null)
-        expect(instance.picture).toEqual({})
+        expect(instance.picture).toEqual(null)
 
         expect(testStorage.remove).toHaveBeenCalledTimes(2)
       } catch (err) {
@@ -334,7 +334,7 @@ describe('AttachmentsPlugin', () => {
 
       try {
         await instance.detach('picture')
-        expect(instance.picture).toEqual({})
+        expect(instance.picture).toEqual(null)
         expect(testStorage.remove).toHaveBeenCalledTimes(2)
       } catch (err) {
         throw err

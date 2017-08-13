@@ -178,13 +178,12 @@ class AttachmentsPlugin {
             filename, attr, instance
           )
         }
-        instance[attr] = {}
       } else {
         await storage.remove(
           instance[attr], attr, instance
         )
-        instance[attr] = null
       }
+      instance[attr] = null
     } catch (err) {
       throw new StorageError(storage, err)
     }
