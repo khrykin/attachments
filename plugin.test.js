@@ -3,41 +3,54 @@
 const createPlugin = require('./')
 
 const {
-  AttachmentsPlugin,
-  PROVIDER_NOT_SET,
+  AttachmentsPlugin
+} = createPlugin
+
+const {
+  // AttachmentsPluginError,
+  ValidationError,
+  PreprocessorError,
+  StorageError,
+  // ProviderError,
+
+  PROVIDER_NOT_SET_ERROR,
   STORAGE_NOT_SET_ERROR,
   ATTRIBUTES_NOT_SET_ERROR,
   PREPROCESSOR_NOT_SET_ERROR,
-  PROVIDER_DIDNT_PASS_INSTANCE,
-  PROVIDER_DIDNT_PASS_IS_MODIFIED// ,
-  // PROVIDER_ADD_ATTRIBUTE_NOT_SET,
-  // PROVIDER_BEFORE_SAVE_NOT_SET,
-  // PROVIDER_AFTER_DELETE_NOT_SET
-} = createPlugin
+  // PROVIDER_METHOD_NOT_SET,
+  PROVIDER_DIDNT_BIND_INSTANCE// ,
+  // PREPROCESSOR_DID_NOT_RETURN
+} = require('./errors')
 
-const TestModel = {
+class TestModel {
+  constructor (props) {
+    Object.assign(this, props)
+  }
+}
+
+TestModel.schema = {
   id: Number,
   name: String
 }
 
-const testInstance = {
+const testInstanceProps = {
   id: 1,
   name: 'Test User',
-  crop: 100,
-  picture: '/some/dir/tmp/test_pic',
-  bg: '/some/dir/tmp/test_bg',
-  scalar: '/some/dir/tmp/test_scalar'
+  crop: 100
 }
 
 const testStorage = {
-  write: jest.fn(),
+  write: jest.fn((filename) => `/stored${filename}`),
   remove: jest.fn()
 }
 
 const TestProvider = {
   name: 'test',
   addAttribute: jest.fn(),
-  beforeSave: jest.fn(),
+  addMethods: (model, attach, detach) => {
+    model.prototype.attach = attach
+    model.prototype.detach = detach
+  },
   afterDelete: jest.fn()
 }
 
@@ -45,8 +58,11 @@ const TestPreprocessor = {
   process: jest.fn((file, styles) => {
     let processed = {}
     for (let style in styles) {
-      // console.log('file in preprocessor', file)
-      processed[style] = `${file}_${style}`
+      let suffix = `_${style}`
+      if (style === 'original') {
+        suffix = ''
+      }
+      processed[style] = `${file}${suffix}`
     }
     return processed
   })
@@ -63,6 +79,13 @@ const defaultOptions = {
         crop: instance.crop
       }),
       validate: jest.fn((filename, instance, next) => {
+        if (filename === 'wrong') {
+          return next(new Error('Wrong file'))
+        }
+
+        if (instance.isWrong) {
+          return next(new Error('Wrong instance'))
+        }
         next()
       })
     },
@@ -83,7 +106,7 @@ describe('AttachmentsPlugin', () => {
        /* eslint-disable  no-new */
       expect(() => {
         new AttachmentsPlugin()
-      }).toThrow(PROVIDER_NOT_SET)
+      }).toThrow(PROVIDER_NOT_SET_ERROR)
 
       expect(() => {
         new AttachmentsPlugin(TestProvider)
@@ -127,8 +150,7 @@ describe('AttachmentsPlugin', () => {
   })
 
   describe('attachAttributes', () => {
-    it('should pass model and style names to provider\'s ' +
-        'addAttribute as arguments', () => {
+    it('should pass model and style names to provider\'s addAttribute()', () => {
       expect(TestProvider.addAttribute)
         .toHaveBeenCalledWith(
           TestModel,
@@ -147,128 +169,186 @@ describe('AttachmentsPlugin', () => {
     })
   })
 
-  describe('handleBeforeSave', () => {
-    const i = new AttachmentsPlugin(
-      TestProvider,
-      defaultOptions
-    )
+  describe('attach', () => {
+    let instance
 
-    it('should throw if instance or isModified' +
-    ' haven\'t been passed', async () => {
-      expect.assertions(2)
-
-      try {
-        await i.handleBeforeSave()
-      } catch (err) {
-        expect(err)
-        .toEqual(new Error(
-          PROVIDER_DIDNT_PASS_INSTANCE(
-            TestProvider,
-            'beforeSave'
-          )
-        ))
-      }
-
-      try {
-        await i.handleBeforeSave(testInstance)
-      } catch (err) {
-        expect(err)
-        .toEqual(new Error(
-          PROVIDER_DIDNT_PASS_IS_MODIFIED(TestProvider)
-        ))
-      }
-    })
-
-    it('should call preprocessor.process() with file' +
-    ' and evaluated styles', async () => {
-      expect.assertions(3)
+    beforeEach(() => {
+      instance = new TestModel(testInstanceProps)
       TestPreprocessor.process.mockClear()
-
-      try {
-        const instance = Object.assign({}, testInstance)
-        await i.handleBeforeSave(instance, () => true)
-
-        expect(TestPreprocessor.process)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_pic', {
-              original: true,
-              small: {
-                resize: '16x16',
-                crop: 100
-              }
-            },
-            instance
-          )
-
-        expect(TestPreprocessor.process)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_bg', {
-              original: true
-            },
-            instance
-          )
-
-        expect(TestPreprocessor.process)
-          .toHaveBeenCalledTimes(2)
-      } catch (err) {
-        throw err
-      }
-    })
-
-    it('should call styles.validate() with file' +
-    ' and instance and callback', async () => {
-      expect.assertions(1)
-      const { validate } = defaultOptions.attributes.picture
-      validate.mockClear()
-
-      try {
-        const instance = Object.assign({}, testInstance)
-        await i.handleBeforeSave(instance, () => true)
-        expect(validate).toHaveBeenCalledTimes(1)
-      } catch (err) {
-        throw err
-      }
-    })
-
-    it('should call storage.write() with processed files' +
-       ', attribute name and instance', async () => {
-      expect.assertions(5)
       testStorage.write.mockClear()
+      testStorage.remove.mockClear()
+    })
+
+    it('should store && attach files for attribute with styles', async () => {
+      expect.assertions(2)
+      try {
+        await instance.attach('picture', '/some/dir/test')
+        expect(instance.picture).toEqual({
+          original: '/stored/some/dir/test',
+          small: '/stored/some/dir/test_small'
+        })
+
+        expect(testStorage.write).toHaveBeenCalledTimes(2)
+      } catch (err) {
+        throw err
+      }
+    })
+
+    it('should store && attach file for scalar attribute', async () => {
+      expect.assertions(2)
+      try {
+        await instance.attach('scalar', '/some/dir/test')
+        expect(instance.scalar).toEqual('/stored/some/dir/test')
+
+        expect(testStorage.write).toHaveBeenCalledTimes(1)
+      } catch (err) {
+        throw err
+      }
+    })
+
+    it('should store && attach files when file is object', async () => {
+      expect.assertions(2)
+      try {
+        await instance.attach('picture', { path: '/some/dir/test' })
+        expect(instance.picture).toEqual({
+          original: '/stored/some/dir/test',
+          small: '/stored/some/dir/test_small'
+        })
+
+        expect(testStorage.write).toHaveBeenCalledTimes(2)
+      } catch (err) {
+        throw err
+      }
+    })
+
+    it('should remove previously stored files', async () => {
+      expect.assertions(2)
+      try {
+        await instance.attach('picture', '/some/dir/test')
+        await instance.attach('picture', '/some/dir/test2')
+
+        expect(instance.picture).toEqual({
+          original: '/stored/some/dir/test2',
+          small: '/stored/some/dir/test2_small'
+        })
+
+        expect(testStorage.remove).toHaveBeenCalledTimes(2)
+      } catch (err) {
+        throw err
+      }
+    })
+
+    it('should validate', async () => {
+      expect.assertions(4)
+      try {
+        await instance.attach('picture', 'wrong')
+      } catch (err) {
+        expect(err).toEqual(new ValidationError('picture', 'Wrong file'))
+      }
+
+      instance.isWrong = true
+      try {
+        await instance.attach('picture', '/some/dir/test2')
+      } catch (err) {
+        expect(err).toEqual(new ValidationError('picture', 'Wrong instance'))
+      }
+
+      expect(TestPreprocessor.process).not.toHaveBeenCalled()
+      expect(testStorage.write).not.toHaveBeenCalled()
+    })
+
+    it('should catch storage or preprocessor errors', async () => {
+      expect.assertions(3)
+      testStorage.write.mockImplementationOnce(() => {
+        throw new Error('storage write error')
+      })
 
       try {
-        const instance = Object.assign({}, testInstance)
-        await i.handleBeforeSave(instance, () => true)
+        await instance.attach('picture', '/some/dir/test')
+      } catch (err) {
+        expect(err).toEqual(
+          new StorageError(testStorage, 'storage write error')
+        )
+      }
 
-        expect(testStorage.write)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_pic_small',
-            'picture',
-            instance
-          )
+      testStorage.remove.mockImplementationOnce(() => {
+        throw new Error('storage remove error')
+      })
 
-        expect(testStorage.write)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_pic_original',
-            'picture',
-            instance
-          )
+      try {
+        await instance.attach('picture', '/some/dir/test')
+        await instance.attach('picture', '/some/dir/test2')
+      } catch (err) {
+        expect(err).toEqual(
+          new StorageError(testStorage, 'storage remove error')
+        )
+      }
 
-        expect(testStorage.write)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_bg_original',
-            'bg',
-            instance
-          )
+      TestPreprocessor.process.mockImplementationOnce(() => {
+        throw new Error('preprocessor error')
+      })
 
-        expect(testStorage.write)
-          .toHaveBeenCalledWith(
-            '/some/dir/tmp/test_scalar',
-            'scalar',
-            instance
-          )
+      try {
+        await instance.attach('picture', '/some/dir/test')
+      } catch (err) {
+        expect(err).toEqual(
+          new PreprocessorError(TestPreprocessor, 'preprocessor error')
+        )
+      }
+    })
 
-        expect(testStorage.write)
-          .toHaveBeenCalledTimes(4)
+    it('should detach files if called with null', async () => {
+      expect.assertions(2)
+      instance.picture = {
+        original: '/stored/some/dir/test',
+        small: '/stored/some/dir/test_small'
+      }
+
+      try {
+        await instance.attach('picture', null)
+        expect(instance.picture).toEqual({})
+
+        expect(testStorage.remove).toHaveBeenCalledTimes(2)
+      } catch (err) {
+        throw err
+      }
+    })
+  })
+
+  describe('detach', () => {
+    let instance
+
+    beforeEach(() => {
+      instance = new TestModel(testInstanceProps)
+      TestPreprocessor.process.mockClear()
+      testStorage.write.mockClear()
+      testStorage.remove.mockClear()
+    })
+
+    it('should detach & remove stored files for attribute with styles', async () => {
+      expect.assertions(2)
+      instance.picture = {
+        original: '/stored/test',
+        small: '/stored/test_small'
+      }
+
+      try {
+        await instance.detach('picture')
+        expect(instance.picture).toEqual({})
+        expect(testStorage.remove).toHaveBeenCalledTimes(2)
+      } catch (err) {
+        throw err
+      }
+    })
+
+    it('should detach & remove stored file for scalar attribute', async () => {
+      expect.assertions(2)
+      instance.scalar = '/stored/test'
+
+      try {
+        await instance.detach('scalar')
+        expect(instance.scalar).toEqual(null)
+        expect(testStorage.remove).toHaveBeenCalledTimes(1)
       } catch (err) {
         throw err
       }
@@ -290,7 +370,7 @@ describe('AttachmentsPlugin', () => {
         expect(err)
         .toEqual(
           new Error(
-            PROVIDER_DIDNT_PASS_INSTANCE(
+            PROVIDER_DIDNT_BIND_INSTANCE(
               TestProvider,
               'afterDelete'
             )

@@ -27,60 +27,79 @@ const SequelizeProvider = require('attachments-provider-sequelize')
 const provider = SequelizeProvider
 ```
 ```javascript
-// Or implement your own for anything
+// Or implement your own for anything:
+
+// Given some generic model
+class User extends SomeODMModel {
+  static schema = {
+    name: String,
+    email: String,
+    password: String
+  }
+}
+
+// Here is provider for our ODM
 const AnythingProvider = {
-  name: 'super-duper-odm',
+  name: 'some-odm',
   addAttribute (model, attribute, styles) {
     // attach attribute to model
 
+    model.schema[attribute] = Object
+
     // model here is some entity to which you can attach
     // attributes and lifecycle hooks - for example
-    // 'schema' in mongoose or 'model' in sequelize.
+    // 'schema' in mongoose or 'model' in sequelize
+    // or User - in this case
 
-    // Note that model must be able to get processed filenames
+    // Note that if you've setup preprocessing styles,
+    // model's instance must be able to set processed filenames
     // by setting instance[attribute] as object,
-    // so, in case if attribute is scalar, you would also
-    // want to setup corresponding scalar attribute for each style,
-    // something like [attribute]_[style],
-    // and virtual getter / setter
+    // so, in case if attribute can only be scalar (i.e String), you would also
+    // want to setup corresponding scalar attribute
+    // for each style and some 'virtual' getter.
+    // For our example model this would look like this:
+    //
+    //   for (let style in styles) {
+    //     this[`${attr}_${style}`] = String
+    //   }
+    //   
+    //   Object.assign(User.schema, {
+    //     get [attr]() {
+    //       let all = {}
+    //       for (let style in styles) {
+    //         all[style] = this[`${attr}_${style}`]
+    //       }
+    //       return all
+    //     }
+    //   })
   },
 
-  beforeSave (model, handle) {
-    // setup before save hook on model
+  addMethods (model, attach, detach) {
+    // add attach() and detach() to your
+    // model's instance methods.
 
-    // here you must call actual provider's hook setter
-    // and call handle() inside
-    model.before('save', async function (next) {
-      try {
-        // note that you must pass to handle() an instance object
-        // (typically - this) and a function which tells
-        // whether given attribute has been changed and needs to be updated
-        // (like document.isModified() in mongooose)
+    // For our example:
 
-        // handle() returns a promise, so you would also want to
-        // catch error if handle() breaks and show it with console.error,
-        // otherwise you will lose it
-        await handle(this, (attr) => this.changed(attr))
-        return next()
-      } catch (err) {
-        // validation error
-        if (err.errors) {
-          return next(new ValidationError(err))
-        }
-        // non-validation error
-        console.error(err.stack)
-      }
-    })
+    model.prototype.attach = attach
+    model.prototype.detach = detach
   },
 
   afterDelete (model, handle) {
     //setup after delete hook on model
+    // where you must await for handle()
+
+    // For our example, given that ODMModel has
+    // ODMModel.after() method:
+
     model.after('destroy', async function (next) {
       try {
-        // here handle() accepts only instance
+        // note that model's instance (this) bust be
+        // paseed to handel()
+
         await handle(this)
         return next()
       } catch (err) {
+        //Show error if handle() rejects
         console.error(err.stack)
       }
     })
@@ -161,13 +180,15 @@ const plugin = createPlugin(provider, {
       preprocessor: SomeDataPreprocessor // overrride default preprocessor
     },
     validate: (file, instance, next) => {
-      // actual check implementation would depend on storage
-      // and how you set your files,
-      // if file is an object with type property,
+      // actual check implementation would depend on
+      // how you set your files in instance.attach(),
+      // if file is an object with mimetype property,
       // could be something like this:
-      if(!/^image/.test(file.type)) {
+
+      if(!/^image/.test(file.mimetype)) {
         return next(new Error('Wrong file type'))
       }
+
       next()
     }
   }
@@ -206,7 +227,11 @@ module.exports = (publicBasepath, attributes) => createPlugin(
 // data/models/User.js
 const attachments = require('../attachments')
 
-const User = /* some model */
+class User extends Model {
+  static schema = {
+    name: String
+  }
+}
 
 attachments({
   picture: {
@@ -218,30 +243,27 @@ attachments({
 
 module.exports = User
 ```
-After this you are able to set files on your instances just as ordinary attributes:
-
+After this you are able to set files on your instances via `instance.attach(attribute, file)` or remove via `instance.detach(attribute)` or `instance.attach(attribute, null)`
 
 ```javascript
+const file = {
+  path: '/tmp/photo.jpg',
+  mimetype: 'image/jpeg'
+} || '/tmp/photo.jpg'
 
 const post = new Post({
   title: 'The Importance of Being Attached',
-  image: '/tmp/photo.jpg'
 })
-
-// or
-
-const file = { path: '/tmp/photo.jpg' }
-const post = new Post({
-  title: 'The Importance of Being Attached',
-  image: file
-})
-
-// or remove previously stored file(s)
-
-post.image = null
+try {
+  await post.attach('picture', file)
+} catch (err) {
+  // handle error
+}
 
 post.save()
 ```
+
+And that's it!
 
 ## Development
 By now all packages are stored in single repo, but you must run tests from specific package directory.

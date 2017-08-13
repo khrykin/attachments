@@ -5,12 +5,6 @@ const defaultOptions = {
   cleanup: true
 }
 
-const NO_PUBLIC_BASEPATH_ERROR =
-  'options.publicBasepath must be provided for LocalFsStorage'
-
-const NO_PATH_TO_PUBLIC_ERROR =
-  'options.pathToPublic must be provided for LocalFsStorage'
-
 class LocalFsStorage {
   /**
    * @param {object} options
@@ -19,6 +13,7 @@ class LocalFsStorage {
    * @param {!string} options.pathToPublic
    * - absolute path to public folder
    */
+
   constructor ({ publicBasepath, pathToPublic } = defaultOptions) {
     if (!publicBasepath) throw new Error(NO_PUBLIC_BASEPATH_ERROR)
     if (!pathToPublic) throw new Error(NO_PATH_TO_PUBLIC_ERROR)
@@ -53,8 +48,8 @@ class LocalFsStorage {
    * options.publicBasepath if it's a function
    * @return {Promise<string, Error>} storedPath
    */
-  async write (file, ...data) {
-    const filename = getFilename(file)
+
+  async write (filename, ...data) {
     const basepath = this.getBasepath(...data)
     const basename = path.basename(filename)
 
@@ -74,12 +69,14 @@ class LocalFsStorage {
       throw err
     }
   }
+
   /**
    * @param {string|object} publicPath - publicPath to remove
    * @param {any} ...data - will be passed as parameters to constructor's
    * options.publicBasepath if it's a function
    * @return {Promise<, Error>}
    */
+
   async remove (publicPath, ...data) {
     try {
       let filename = this.getAbsPath(publicPath)(...data)
@@ -90,20 +87,20 @@ class LocalFsStorage {
         files = await fs.readdir(filename)
       } while (!files.length && filename !== this.pathToPublic)
     } catch (err) {
-      throw err
+      // don't throw if file was already removed
+      if (err.code !== 'ENOENT') {
+        throw err
+      }
+      console.warn(err)
     }
   }
 }
 
-/**
- * Generic filename getter
- * @param file {string|object}
- * @return {string}
- */
+const NO_PUBLIC_BASEPATH_ERROR =
+  'options.publicBasepath must be provided for LocalFsStorage'
 
-function getFilename (file) {
-  return file.path || file
-}
+const NO_PATH_TO_PUBLIC_ERROR =
+  'options.pathToPublic must be provided for LocalFsStorage'
 
 if (process.env.NODE_ENV === 'test') {
   Object.assign(LocalFsStorage, {

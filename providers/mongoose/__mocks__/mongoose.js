@@ -10,6 +10,7 @@ const mongoose = {}
 class Schema {
   constructor (attributes) {
     this.attributes = {}
+    this.methods = {}
     this.middleware = { pre: {}, post: {} }
     this.add(attributes)
   }
@@ -34,12 +35,7 @@ Schema.Types = {
 const model = (name, schema) => class {
   constructor (attributes) {
     Object.assign(this, attributes)
-  }
-
-  async save () {
-    schema.middleware.pre.save.call(this, () => {
-      /* save */
-    })
+    Object.assign(this, schema.methods)
   }
 
   async remove () {

@@ -8,12 +8,13 @@ const { Schema, model } = require('./__mocks__/mongoose')
 
 const {
   addAttribute,
-  beforeSave,
-  afterDelete
+  addMethods,
+  addAfterDelete
 } = require('./MongooseProvider')
 
+const schema = new Schema({ name: String })
+
 describe('MongooseProvider', () => {
-  const schema = new Schema({ name: String })
   addAttribute(schema, 'picture')
 
   describe('addAttribute', () => {
@@ -23,29 +24,43 @@ describe('MongooseProvider', () => {
     })
   })
 
-  describe('beforeSave', () => {
-    beforeSave(schema, (instance) => {
-      expect(instance._id).toBe(1)
-    })
+  describe('addMethods', () => {
+    const attach = function () {
+      expect(this._id).toBe(1)
+    }
+    const detach = attach
 
-    afterDelete(schema, (instance) => {
-      expect(instance._id).toBe(1)
-    })
+    addMethods(schema, attach, detach)
 
     const User = model('User', schema)
     const user = new User({ _id: 1 })
 
-    it('should call handle(this) before save', async () => {
-      expect.assertions(1)
+    it('should bind attach() and detach()', async () => {
+      expect.assertions(2)
       try {
-        await user.save()
+        await user.attach('picture', 'test.jpg')
+        await user.detach('picture', 'test.jpg')
       } catch (err) {
         throw err
       }
     })
+  })
 
-    it('should call handle(this) after delete', async () => {
+  describe('addAfterDelete', () => {
+    it('should pass this to handle()', async () => {
       expect.assertions(1)
+
+      const handle = (instance) => {
+        expect(instance._id).toBe(1)
+      }
+
+      addAfterDelete(schema, handle)
+
+      const User = model('User', schema)
+      const user = new User({ _id: 1 })
+
+      user.picture = 'test.jpg'
+
       try {
         await user.remove()
       } catch (err) {

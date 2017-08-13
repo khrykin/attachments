@@ -6,25 +6,12 @@ const MongooseProvider = {
     schema.add({ [attribute]: Schema.Types.Mixed })
   },
 
-  beforeSave (schema, handle) {
-    schema.pre('save', async function (next) {
-      try {
-        await handle(this, attr => this.isModified(attr))
-      } catch (err) {
-        // validation error
-        if (err.errors) {
-          // TODO convert AttachmentsPlugin ValidationError
-          // to mongoose ValidationError
-          return next(err)
-        }
-        // not-validation error
-        console.error(err.stack)
-      }
-      return next()
-    })
+  addMethods (schema, attach, detach) {
+    schema.methods.attach = attach
+    schema.methods.detach = detach
   },
 
-  afterDelete (schema, handle) {
+  addAfterDelete (schema, handle) {
     schema.post('remove', async function (next) {
       try {
         await handle(this)

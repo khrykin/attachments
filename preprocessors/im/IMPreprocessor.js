@@ -145,8 +145,7 @@ function convert (source, target, args = []) {
 
 const NO_STYLES_ERROR = 'No styles was set to process'
 const NO_PROPERTIES_ERROR =
-  'Can\'t have a style without any properies'
-
+  'Can\'t have a style without any properties'
 
 if (process.env.NODE_ENV === 'test') {
   Object.assign(IMPreprocessor, {

@@ -50,25 +50,6 @@ describe('LocalFsStorage', () => {
         .toBe(-1)
     })
 
-    it('should resolve and write when file is object', async () => {
-      __setMockFiles(['/some/tmp/test.jpg'])
-
-      expect.assertions(3)
-      try {
-        const stored = await storage.write({ path: '/some/tmp/test.jpg' })
-        expect(stored).toBe('/images/test.jpg')
-      } catch (err) {
-        throw err
-      }
-
-      const mockFiles = __getMockFiles()
-
-      expect(mockFiles['/some/dir/public/images'])
-        .toEqual(['test.jpg'])
-      expect(mockFiles['/some/tmp'].indexOf('test.jpg'))
-        .toBe(-1)
-    })
-
     it('should reject when file doesn\'t exist', async () => {
       __setMockFiles([])
 
