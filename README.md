@@ -266,7 +266,7 @@ post.save()
 And that's it!
 
 ## Development
-By now all packages are stored in single repo, but you must run tests from specific package directory.
+All packages are stored in single repo. Run all tests with `npm test` or some specific test like `npm test -- LocalFsStorage`
 Package naming conventions:
 - provider - `attachments-provider-<name>`
 - storage - `attachments-storage-<name>`
