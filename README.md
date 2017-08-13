@@ -141,12 +141,12 @@ const storage = new LocalFsStorage({
 ```javascript
 //Anything remote
 const RemoteStorage = {
-  async write (file, ...data) {
+  async write (file, attribute, instance) {
     // store somewhere
     return stored
   },
 
-  async remove (remotePath, ...data) {
+  async remove (remotePath, attribute, instance) {
     // remove from stored
   }
 }
