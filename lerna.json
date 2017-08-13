@@ -4,6 +4,5 @@
     "preprocessors/*",
     "providers/*",
     "storages/*"
-  ],
-  "version": "0.1.0"
+  ]
 }
