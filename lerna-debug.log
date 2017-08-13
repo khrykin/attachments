@@ -1,0 +1,36 @@
+0 silly input [ 'publish' ]
+1 silly flags { _: [ 'publish' ] }
+2 verbose rootPath /Users/khrykin/Developer/Node.js/ski-o/attachments
+3 info version 2.0.0
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Users/khrykin/Developer/Node.js/ski-o/attachments/VERSION
+7 silly initialize attempt
+8 info current version undefined
+9 silly getUpdates
+10 info Checking for updated packages...
+11 silly hasTags
+12 verbose hasTags true
+13 silly getLastTag
+14 verbose getLastTag vundefined
+15 info Comparing with vundefined.
+16 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
+17 silly diff plugin/package.json
+18 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
+19 silly diff
+20 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
+21 silly diff
+22 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/plain
+23 silly diff
+24 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
+25 silly diff
+26 verbose updated attachments
+27 silly collectDependents
+28 silly isPackageDependentOf attachments attachments
+29 silly isPackageDependentOf attachments-preprocessor-im attachments
+30 silly isPackageDependentOf attachments-provider-mongoose attachments
+31 silly isPackageDependentOf attachments-provider-plain attachments
+32 silly isPackageDependentOf attachments-storage-local-fs attachments
+33 silly collectUpdates
+34 verbose has filtered update attachments
+35 verbose initialize exited early
