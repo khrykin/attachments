@@ -9,8 +9,9 @@ class AttachmentsPluginError extends Error {
  * Erorr for specific attribute validation
  */
 
-class ValidationError {
+class ValidationError extends Error {
   constructor (attribute, message) {
+    super()
     const text = message.message || message
     this.message = `ValidationError (${attribute}): ${text}`
     this.attribute = attribute
