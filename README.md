@@ -250,6 +250,7 @@ const file = {
 const post = new Post({
   title: 'The Importance of Being Attached',
 })
+
 try {
   await post.attach('picture', file)
 } catch (err) {
