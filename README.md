@@ -60,14 +60,14 @@ const AnythingProvider = {
     // For our example model this would look like this:
     //
     //   for (let style in styles) {
-    //     this[`${attr}_${style}`] = String
+    //     this[`${attribute}_${style}`] = String
     //   }
     //   
     //   Object.assign(User.schema, {
-    //     get [attr]() {
+    //     get [attribute]() {
     //       let all = {}
     //       for (let style in styles) {
-    //         all[style] = this[`${attr}_${style}`]
+    //         all[style] = this[`${attribute}_${style}`]
     //       }
     //       return all
     //     }
@@ -94,7 +94,7 @@ const AnythingProvider = {
     model.after('destroy', async function (next) {
       try {
         // note that model's instance (this) bust be
-        // paseed to handel()
+        // passed to handle()
 
         await handle(this)
         return next()
