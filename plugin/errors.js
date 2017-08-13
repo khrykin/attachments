@@ -1,7 +1,8 @@
 class AttachmentsPluginError extends Error {
   constructor (message) {
     super()
-    this.message = message`${this.constructor.name}: ${message}`
+    const text = message ? message.message || message : ''
+    this.message = `${this.constructor.name}: ${text}`
   }
 }
 
@@ -11,7 +12,8 @@ class AttachmentsPluginError extends Error {
 
 class ValidationError extends Error {
   constructor (attribute, message) {
-    super(message)
+    super()
+    this.message = message ? message.message || message : ''
     this.attribute = attribute
   }
 }
@@ -23,7 +25,7 @@ class ValidationError extends Error {
 class ModuleError extends Error {
   constructor (entity, message) {
     super()
-    const text = message.message || message
+    const text = message ? message.message || message : ''
     const name = entity.name ? capitalize(entity.name) : ''
     this.message = `${name}${this.constructor.name}: ${text}`
     this[entity] = entity
