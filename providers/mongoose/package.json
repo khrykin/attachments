@@ -20,7 +20,7 @@
     }
   },
   "devDependencies": {
-    "jest": "^20.0.4"
-  },
-  "dependencies": {}
+    "jest": "^20.0.4",
+    "mongoose": "^4.11.6"
+  }
 }

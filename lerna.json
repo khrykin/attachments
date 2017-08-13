@@ -1,0 +1,9 @@
+{
+  "lerna": "2.0.0",
+  "packages": [
+    "preprocessors/*",
+    "providers/*",
+    "storages/*"
+  ],
+  "version": "0.1.0"
+}

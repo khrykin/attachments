@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const createPlugin = require('./')
+const createPlugin = require('./plugin')
 
 const {
   AttachmentsPlugin

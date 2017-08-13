@@ -2,9 +2,10 @@
   "name": "attachments",
   "version": "0.1.0",
   "description": "Storage and model agnostic modular framework for hadling file attachments and preprocessing",
-  "main": "plugin.js",
+  "main": "plugin/index.js",
   "repository": "https://github.com/khrykin/attachments",
   "scripts": {
+    "install": "yarn lerna bootstrap",
     "test": "jest"
   },
   "standard": {
@@ -19,6 +20,7 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "jest": "^20.0.4",
+    "lerna": "^2.0.0",
     "standard": "^10.0.3"
   }
 }
