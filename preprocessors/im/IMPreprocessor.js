@@ -141,6 +141,34 @@ function convert (source, target, args = []) {
   })
 }
 
+
+/**
+ * Returns imagemagick's -crop argument
+ * @param {object} crop
+ * @param {?number} crop.x - left corner x coordinate in px
+ * @param {?number} crop.y - left corner y coordinate in px
+ * @param {!number} crop.width - crop box width in px
+ * @param {!number} crop.height - crop box height in px
+ * @return {string}
+ */
+
+function getCrop (crop) {
+  if (!crop) return undefined
+
+  const { x = 0, y = 0, width, height } = crop
+
+  if (typeof height === 'undefined') {
+    throw new Error('crop width is undefined')
+  }
+
+  if (typeof height === 'undefined') {
+    throw new Error('crop height is undefined')
+  }
+
+  return `${width}x${height}+${x}+${y}`
+}
+
+
 /* Errors */
 
 const NO_STYLES_ERROR = 'No styles was set to process'
@@ -156,5 +184,9 @@ if (process.env.NODE_ENV === 'test') {
     NO_PROPERTIES_ERROR
   })
 }
+
+Object.assign(IMPreprocessor, {
+  getCrop
+})
 
 module.exports = IMPreprocessor

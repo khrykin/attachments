@@ -1,6 +1,6 @@
 {
   "name": "attachments-preprocessor-im",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Imagemagick preprocessor for attachments",
   "repository": "https://github.com/khrykin/attachments",
   "main": "IMPreprocessor.js",
