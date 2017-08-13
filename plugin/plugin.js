@@ -107,7 +107,7 @@ class AttachmentsPlugin {
 
     if (validate) {
       await this.validate(
-        attr, filename, instance
+        attr, file, instance
       )
     }
 
@@ -226,10 +226,10 @@ class AttachmentsPlugin {
    * @param {object} instvalidateance
    */
 
-  validate (attr, filename, instance) {
+  validate (attr, file, instance) {
     const validator = this.getValidateForAttribute(attr)
     return new Promise((resolve, reject) => {
-      validator(filename, instance, (err) => {
+      validator(file, instance, (err) => {
         if (err) {
           return reject(
             new ValidationError(attr, err)

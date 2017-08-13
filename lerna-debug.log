@@ -6,60 +6,35 @@
 5 silly isInitialized true
 6 silly existsSync /Users/khrykin/Developer/Node.js/ski-o/attachments/VERSION
 7 silly initialize attempt
-8 info current version null
+8 info current version undefined
 9 silly getUpdates
 10 info Checking for updated packages...
 11 silly hasTags
 12 verbose hasTags true
 13 silly getLastTag
-14 verbose getLastTag vnull
-15 info Comparing with vnull.
-16 silly diffSinceIn vnull /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
-17 silly diff
-18 silly diffSinceIn vnull /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
+14 verbose getLastTag v0.1.1
+15 info Comparing with v0.1.1.
+16 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
+17 silly diff plugin/package-lock.json
+17 silly diff plugin/package.json
+17 silly diff plugin/plugin.js
+17 silly diff plugin/plugin.test.js
+17 silly diff plugin/yarn-error.log
+18 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
 19 silly diff
-20 silly diffSinceIn vnull /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
+20 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
 21 silly diff
-22 silly diffSinceIn vnull /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/plain
+22 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/plain
 23 silly diff
-24 silly diffSinceIn vnull /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
+24 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
 25 silly diff
-26 silly collectDependents
-27 silly collectUpdates
-28 info No updated packages to publish.
-29 silly initialize success
-30 silly execute attempt
-31 silly isDetachedHead
-32 silly getCurrentBranch
-33 verbose getCurrentBranch master
-34 verbose isDetachedHead false
-35 silly addFile /Users/khrykin/Developer/Node.js/ski-o/attachments/lerna.json
-36 silly commit vundefined
-37 verbose commit [ 'commit', '-m', 'vundefined' ]
-38 silly addTag vundefined
-39 error execute Error: fatal: tag 'vundefined' already exists
-39 error execute
-39 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
-39 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
-39 error execute     at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)
-39 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)
-39 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
-39 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
-39 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
-39 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
-39 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
-39 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
-39 error execute  callback with error
-39 error execute  { Error: fatal: tag 'vundefined' already exists
-39 error execute
-39 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
-39 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
-39 error execute     at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)
-39 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)
-39 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
-39 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
-39 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
-39 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
-39 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
-39 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
-39 error execute   stack: 'Error: fatal: tag \'vundefined\' already exists\n\n    at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)\n    at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)\n    at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)\n    at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)\n    at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)\n    at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)\n    at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13\n    at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)' }
+26 verbose updated attachments
+27 silly collectDependents
+28 silly isPackageDependentOf attachments attachments
+29 silly isPackageDependentOf attachments-preprocessor-im attachments
+30 silly isPackageDependentOf attachments-provider-mongoose attachments
+31 silly isPackageDependentOf attachments-provider-plain attachments
+32 silly isPackageDependentOf attachments-storage-local-fs attachments
+33 silly collectUpdates
+34 verbose has filtered update attachments
+35 verbose initialize exited early
