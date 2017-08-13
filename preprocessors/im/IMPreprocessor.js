@@ -141,7 +141,6 @@ function convert (source, target, args = []) {
   })
 }
 
-
 /**
  * Returns imagemagick's -crop argument
  * @param {object} crop
@@ -167,7 +166,6 @@ function getCrop (crop) {
 
   return `${width}x${height}+${x}+${y}`
 }
-
 
 /* Errors */
 
