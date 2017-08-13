@@ -14,6 +14,15 @@
       "jest": true
     }
   },
+  "keywords": [
+    "attachments",
+    "uploads",
+    "file uploads",
+    "file attachments",
+    "processing",
+    "preprocessing",
+    "storage"
+  ],
   "author": "Dmitry Khrykin",
   "license": "ISC",
   "devDependencies": {

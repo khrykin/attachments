@@ -15,26 +15,43 @@
 14 verbose getLastTag v0.1.1
 15 info Comparing with v0.1.1.
 16 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
+17 silly diff plugin/errors.js
 17 silly diff plugin/package-lock.json
 17 silly diff plugin/package.json
 17 silly diff plugin/plugin.js
 17 silly diff plugin/plugin.test.js
 17 silly diff plugin/yarn-error.log
 18 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
-19 silly diff
+19 silly diff preprocessors/im/IMPreprocessor.js
+19 silly diff preprocessors/im/package.json
 20 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
-21 silly diff
-22 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/plain
-23 silly diff
-24 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
-25 silly diff
-26 verbose updated attachments
-27 silly collectDependents
-28 silly isPackageDependentOf attachments attachments
-29 silly isPackageDependentOf attachments-preprocessor-im attachments
-30 silly isPackageDependentOf attachments-provider-mongoose attachments
-31 silly isPackageDependentOf attachments-provider-plain attachments
-32 silly isPackageDependentOf attachments-storage-local-fs attachments
-33 silly collectUpdates
-34 verbose has filtered update attachments
-35 verbose initialize exited early
+21 silly diff providers/mongoose/package.json
+22 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
+23 silly diff storages/local-fs/package.json
+24 verbose updated attachments
+25 verbose updated attachments-preprocessor-im
+26 verbose updated attachments-provider-mongoose
+27 verbose updated attachments-storage-local-fs
+28 silly collectDependents
+29 silly isPackageDependentOf attachments attachments
+30 silly isPackageDependentOf attachments attachments-preprocessor-im
+31 silly isPackageDependentOf attachments attachments-provider-mongoose
+32 silly isPackageDependentOf attachments attachments-storage-local-fs
+33 silly isPackageDependentOf attachments-preprocessor-im attachments
+34 silly isPackageDependentOf attachments-preprocessor-im attachments-preprocessor-im
+35 silly isPackageDependentOf attachments-preprocessor-im attachments-provider-mongoose
+36 silly isPackageDependentOf attachments-preprocessor-im attachments-storage-local-fs
+37 silly isPackageDependentOf attachments-provider-mongoose attachments
+38 silly isPackageDependentOf attachments-provider-mongoose attachments-preprocessor-im
+39 silly isPackageDependentOf attachments-provider-mongoose attachments-provider-mongoose
+40 silly isPackageDependentOf attachments-provider-mongoose attachments-storage-local-fs
+41 silly isPackageDependentOf attachments-storage-local-fs attachments
+42 silly isPackageDependentOf attachments-storage-local-fs attachments-preprocessor-im
+43 silly isPackageDependentOf attachments-storage-local-fs attachments-provider-mongoose
+44 silly isPackageDependentOf attachments-storage-local-fs attachments-storage-local-fs
+45 silly collectUpdates
+46 verbose has filtered update attachments
+47 verbose has filtered update attachments-preprocessor-im
+48 verbose has filtered update attachments-provider-mongoose
+49 verbose has filtered update attachments-storage-local-fs
+50 verbose initialize exited early

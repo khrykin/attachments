@@ -19,6 +19,15 @@
       "jest": true
     }
   },
+  "keywords": [
+    "attachments",
+    "uploads",
+    "file uploads",
+    "file attachments",
+    "processing",
+    "preprocessing",
+    "mongoose"
+  ],
   "devDependencies": {
     "jest": "^20.0.4",
     "mongoose": "^4.11.6"

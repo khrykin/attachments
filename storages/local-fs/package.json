@@ -19,6 +19,16 @@
       "jest": true
     }
   },
+  "keywords" : [
+    "attachments",
+    "uploads",
+    "file uploads",
+    "file attachments",
+    "processing",
+    "preprocessing",
+    "local",
+    "local file system"
+  ],
   "devDependencies": {
     "jest": "^20.0.4",
     "fs-extra": "^4.0.1"

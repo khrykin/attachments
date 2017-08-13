@@ -9,6 +9,15 @@
   },
   "author": "Dmitry Khrykin",
   "license": "ISC",
+  "keywords": [
+    "attachments",
+    "uploads",
+    "file uploads",
+    "file attachments",
+    "processing",
+    "preprocessing",
+    "imagemagick"
+  ],
   "peerDependencies": {
     "imagemagick": "^0.1.3"
   },
