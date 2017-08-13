@@ -275,4 +275,4 @@ Package naming conventions:
 Code should be written in [standard](https://standardjs.com/) with node `>8.0.0` syntax and APIs
 
 ## License
-  MIT
+ISC
