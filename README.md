@@ -105,6 +105,7 @@ const AnythingProvider = {
     })
   }
 }
+
 const provider = AnythingProvider
 ```
 
@@ -125,6 +126,7 @@ const AnythingPreprocessor = {
     return processed // path to processed entity
   }
 }
+
 const preprocessor = AnythingPreprocessor
 ```
 ### Storages
@@ -150,8 +152,8 @@ const RemoteStorage = {
     // remove from stored
   }
 }
+
 const storage = RemoteStorage
-})
 ```
 
 ### Putting it all together
@@ -165,32 +167,29 @@ const plugin = createPlugin(provider, {
   attributes: {
     picture: {
       original: true,
-      small: (instance) => ({
+      croppped: (instance) => ({
         crop: instance.crop
-      })
-    },
-    thumb: {
-      original: true,
-      small: {
-        resize: '12x12'
+      }),
+      thumb: {
+        resize: '16x16'
       },
-    },
-    large: {
-      storage: SomeRemoteDataStorage // override default storage
-      preprocessor: SomeDataPreprocessor // overrride default preprocessor
-    },
-    validate: (file, instance, next) => {
-      // actual check implementation would depend on
-      // how you set your files in instance.attach(),
-      // if file is an object with mimetype property,
-      // could be something like this:
+      storage: SomeRemoteDataStorage, // override default storage
+      preprocessor: SomeDataPreprocessor, // overrride default preprocessor
+      validate: (file, instance, next) => {
+        // actual check implementation would depend on
+        // how you set your files in instance.attach(),
+        // if file is an object with mimetype property,
+        // could be something like this:
 
-      if(!/^image/.test(file.mimetype)) {
-        return next(new Error('Wrong file type'))
-      }
+        if(!/^image/.test(file.mimetype)) {
+          return next(new Error('Wrong file type'))
+        }
 
-      next()
+        next()
+      },
+      wordDoc: true // plain non-processed attribute (for example, Word document)
     }
+   
   }
 })
 
