@@ -1,6 +1,6 @@
 {
   "name": "attachments",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Storage and model agnostic modular framework for hadling file attachments and preprocessing",
   "main": "index.js",
   "repository": "https://github.com/khrykin/attachments",

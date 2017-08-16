@@ -288,6 +288,9 @@ class AttachmentsPlugin {
         continue
       }
       let style = this.attributes[attr][key]
+      if (typeof style === 'undefined') {
+        continue
+      }
       if (typeof style === 'function') {
         style = style(instance)
       }

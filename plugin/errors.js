@@ -1,19 +1,24 @@
+/**
+ * Generic Error
+ */
+
 class AttachmentsPluginError extends Error {
   constructor (message) {
     super()
-    const text = message ? message.message || message : ''
-    this.message = `${this.constructor.name}: ${text}`
+    this.message = message ? message.message || message : ''
+    this.name = 'AttachmentsPluginError'
   }
 }
 
 /**
- * Erorr for specific attribute validation
+ * Error for specific attribute validation
  */
 
-class ValidationError extends Error {
+class ValidationError extends AttachmentsPluginError {
   constructor (attribute, message) {
     super()
     this.message = message ? message.message || message : ''
+    this.name = 'ValidationError'
     this.attribute = attribute
   }
 }
@@ -22,30 +27,29 @@ class ValidationError extends Error {
  * Abstract Error class
  */
 
-class ModuleError extends Error {
+class ModuleError extends AttachmentsPluginError {
   constructor (entity, message) {
     super()
-    const text = message ? message.message || message : ''
-    const name = entity.name ? capitalize(entity.name) : ''
-    this.message = `${name}${this.constructor.name}: ${text}`
+    this.message = message ? message.message || message : ''
+    this.name = this.constructor.name
     this[entity] = entity
   }
 }
 
 /**
- * Erorr that came from preprocessor methods
+ * Error that came from preprocessor methods
  */
 
 class PreprocessorError extends ModuleError {}
 
 /**
- * Erorr that came from storage methods
+ * Error that came from storage methods
  */
 
 class StorageError extends ModuleError {}
 
 /**
- * Erorr that came from provider methods
+ * Error that came from provider methods
  */
 
 class ProviderError extends ModuleError {}
