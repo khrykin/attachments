@@ -3,7 +3,7 @@
  */
 
 class AttachmentsPluginError extends Error {
-  constructor (message) {
+  constructor(message) {
     super()
     this.message = message ? message.message || message : ''
     this.name = 'AttachmentsPluginError'
@@ -15,7 +15,7 @@ class AttachmentsPluginError extends Error {
  */
 
 class ValidationError extends AttachmentsPluginError {
-  constructor (attribute, message) {
+  constructor(attribute, message) {
     super()
     this.message = message ? message.message || message : ''
     this.name = 'ValidationError'
@@ -28,7 +28,7 @@ class ValidationError extends AttachmentsPluginError {
  */
 
 class ModuleError extends AttachmentsPluginError {
-  constructor (entity, message) {
+  constructor(entity, message) {
     super()
     this.message = message ? message.message || message : ''
     this.name = this.constructor.name
@@ -56,14 +56,11 @@ class ProviderError extends ModuleError {}
 
 /* Messages */
 
-const PROVIDER_NOT_SET_ERROR =
-  'Provider isn\'t set'
+const PROVIDER_NOT_SET_ERROR = "Provider isn't set"
 
-const STORAGE_NOT_SET_ERROR =
-  'options.storage must be set'
+const STORAGE_NOT_SET_ERROR = 'options.storage must be set'
 
-const ATTRIBUTES_NOT_SET_ERROR =
-  'options.attributes must beset'
+const ATTRIBUTES_NOT_SET_ERROR = 'options.attributes must beset'
 
 const PREPROCESSOR_NOT_SET_ERROR =
   'options.preprocessor must be set if attributes ' +
@@ -73,18 +70,12 @@ const PROVIDER_METHOD_NOT_SET = method =>
   `Provider doesn't have ${method} method defined`
 
 const PROVIDER_DIDNT_BIND_INSTANCE = (method, to) =>
-`Provider ${method} didn't bind instance to ${to}()`
+  `Provider ${method} didn't bind instance to ${to}()`
 
-const PREPROCESSOR_DID_NOT_RETURN =
-  `Preprocessor process() didn't return anything`
+const PREPROCESSOR_DID_NOT_RETURN = `Preprocessor process() didn't return anything`
 
-/**
- * Capitalizes
- */
-
-function capitalize (string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
+const WRONG_ATTRIBUTE_ERROR = attr =>
+  `Tried to attach attribute "${attr}", that isn't defined on the model`
 
 module.exports = {
   AttachmentsPluginError,
@@ -96,6 +87,7 @@ module.exports = {
   PROVIDER_NOT_SET_ERROR,
   STORAGE_NOT_SET_ERROR,
   ATTRIBUTES_NOT_SET_ERROR,
+  WRONG_ATTRIBUTE_ERROR,
   PREPROCESSOR_NOT_SET_ERROR,
   PROVIDER_METHOD_NOT_SET,
   PROVIDER_DIDNT_BIND_INSTANCE,

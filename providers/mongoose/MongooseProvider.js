@@ -12,13 +12,12 @@ const MongooseProvider = {
   },
 
   addAfterDelete (schema, handle) {
-    schema.post('remove', async function (next) {
+    schema.post('remove', async function () {
       try {
         await handle(this)
       } catch (err) {
         return console.error(err.stack)
       }
-      return next()
     })
   }
 }

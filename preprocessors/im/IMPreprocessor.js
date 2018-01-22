@@ -1,6 +1,7 @@
 const im = require('imagemagick')
 const kebabCase = require('lodash/kebabCase')
 const path = require('path')
+const fs = require('fs-extra')
 
 const IMPreprocessor = {
   name: 'imagemagick',
@@ -12,7 +13,7 @@ const IMPreprocessor = {
    * @return {Promise<object, Error>}
    */
 
-  async process (filename, styles = {}, data) {
+  async process(filename, styles = {}, data) {
     let result = {}
 
     if (
@@ -22,6 +23,8 @@ const IMPreprocessor = {
     ) {
       throw new Error(NO_STYLES_ERROR)
     }
+
+    let promises = []
 
     for (let style in styles) {
       // leave original file as it is
@@ -33,21 +36,28 @@ const IMPreprocessor = {
       const props = getPropsForData(styles[style], data)
       const args = getArgsFromProps(props)
       const format = getFormat(styles[style]['$format'])
-      const processedFilename =
-        getFilenameForStyle(filename, style, format)
+      const processedFilename = getFilenameForStyle(filename, style, format)
 
-      try {
-        const processed = await convert(
-          filename,
-          processedFilename,
-          args
-        )
-
+      const promise = convert(
+        filename,
+        processedFilename,
+        args
+      ).then(processed => {
         result[style] = processed
-      } catch (err) {
-        throw err
-      }
+      })
+
+      promises.push(promise)
     }
+
+    await Promise.all(promises)
+
+    // If there is no original style defined,
+    // remove original file
+
+    if (!styles.original) {
+      await fs.remove(filename)
+    }
+
     return result
   }
 }
@@ -60,11 +70,8 @@ const IMPreprocessor = {
  * @return {Array}
  */
 
-function getArgsFromProps (props, instance) {
-  if (
-    typeof props !== 'object' ||
-    !Object.keys(props).length
-  ) {
+function getArgsFromProps(props, instance) {
+  if (typeof props !== 'object' || !Object.keys(props).length) {
     throw new Error(NO_PROPERTIES_ERROR)
   }
 
@@ -91,10 +98,8 @@ function getArgsFromProps (props, instance) {
  * @return {Object}
  */
 
-function getPropsForData (props, data) {
-  return typeof props === 'function'
-    ? props(data)
-    : props
+function getPropsForData(props, data) {
+  return typeof props === 'function' ? props(data) : props
 }
 
 /**
@@ -104,7 +109,7 @@ function getPropsForData (props, data) {
  * @return {string}
  */
 
-function getFilenameForStyle (filename, style, format) {
+function getFilenameForStyle(filename, style, format) {
   const { dir, ext, name } = path.parse(filename)
   return `${dir}/${name}_${style}${format || ext}`
 }
@@ -114,7 +119,7 @@ function getFilenameForStyle (filename, style, format) {
  * @param {?string} format
  * @return {string}
  */
-function getFormat (format) {
+function getFormat(format) {
   if (!format || /^\./.test(format)) return
   return `.${format}`
 }
@@ -127,17 +132,15 @@ function getFormat (format) {
  * @return {Promise<string, Error>}
  */
 
-function convert (source, target, args = []) {
+function convert(source, target, args = []) {
   if (!target) target = source
   return new Promise((resolve, reject) => {
-    im.convert(
-      [ source, ...args, target ],
-      (err, stdout, stderr) => {
-        if (err) return reject(err)
-        if (stderr) return reject(stderr)
+    im.convert([source, ...args, target], (err, stdout, stderr) => {
+      if (err) return reject(err)
+      if (stderr) return reject(stderr)
 
-        resolve(target)
-      })
+      resolve(target)
+    })
   })
 }
 
@@ -151,7 +154,7 @@ function convert (source, target, args = []) {
  * @return {string}
  */
 
-function getCrop (crop) {
+function getCrop(crop) {
   if (!crop) return undefined
 
   const { x = 0, y = 0, width, height } = crop
@@ -170,8 +173,7 @@ function getCrop (crop) {
 /* Errors */
 
 const NO_STYLES_ERROR = 'No styles was set to process'
-const NO_PROPERTIES_ERROR =
-  'Can\'t have a style without any properties'
+const NO_PROPERTIES_ERROR = "Can't have a style without any properties"
 
 if (process.env.NODE_ENV === 'test') {
   Object.assign(IMPreprocessor, {

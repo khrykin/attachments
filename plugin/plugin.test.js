@@ -238,6 +238,8 @@ describe('AttachmentsPlugin', () => {
       }
     })
 
+    it('should call beforeValidate')
+
     it('should validate', async () => {
       expect.assertions(4)
       try {

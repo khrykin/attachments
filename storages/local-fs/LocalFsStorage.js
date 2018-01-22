@@ -23,9 +23,10 @@ class LocalFsStorage {
   }
 
   getBasepath (...data) {
-    const publicPath = typeof this.publicBasepath === 'function'
-      ? this.publicBasepath(...data)
-      : this.publicBasepath
+    const publicPath =
+      typeof this.publicBasepath === 'function'
+        ? this.publicBasepath(...data)
+        : this.publicBasepath
 
     return path.join(this.pathToPublic, publicPath)
   }
@@ -54,6 +55,7 @@ class LocalFsStorage {
     const basename = path.basename(filename)
 
     const absPath = path.join(basepath, basename)
+
     try {
       await fs.ensureDir(basepath)
 
