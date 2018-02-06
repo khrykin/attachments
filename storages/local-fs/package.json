@@ -30,7 +30,7 @@
     "local file system"
   ],
   "devDependencies": {
-    "jest": "^20.0.4",
-    "fs-extra": "^4.0.1"
+    "fs-extra": "^4.0.1",
+    "jest": "^20.0.4"
   }
 }

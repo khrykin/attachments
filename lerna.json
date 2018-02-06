@@ -5,5 +5,6 @@
     "preprocessors/*",
     "providers/*",
     "storages/*"
-  ]
+  ],
+  "version": null
 }
