@@ -34,37 +34,30 @@
 33 silly addFile /Users/khrykin/Developer/Node.js/ski-o/attachments/lerna.json
 34 silly commit vundefined
 35 verbose commit [ 'commit', '-m', 'vundefined' ]
-36 error execute Error: On branch master
-36 error execute Changes not staged for commit:
-36 error execute 	modified:   lerna-debug.log
-36 error execute
-36 error execute no changes added to commit
-36 error execute
-36 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
-36 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
-36 error execute     at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)
-36 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)
-36 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
-36 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
-36 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
-36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
-36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
-36 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
-36 error execute  callback with error
-36 error execute  { Error: On branch master
-36 error execute Changes not staged for commit:
-36 error execute 	modified:   lerna-debug.log
-36 error execute
-36 error execute no changes added to commit
-36 error execute
-36 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
-36 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
-36 error execute     at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)
-36 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)
-36 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
-36 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
-36 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
-36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
-36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
-36 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
-36 error execute   stack: 'Error: On branch master\nChanges not staged for commit:\n\tmodified:   lerna-debug.log\n\nno changes added to commit\n\n    at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)\n    at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)\n    at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)\n    at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)\n    at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)\n    at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)\n    at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13\n    at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)' }
+36 silly addTag vundefined
+37 error execute Error: fatal: tag 'vundefined' already exists
+37 error execute
+37 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
+37 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+37 error execute     at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)
+37 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)
+37 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
+37 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
+37 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
+37 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
+37 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
+37 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
+37 error execute  callback with error
+37 error execute  { Error: fatal: tag 'vundefined' already exists
+37 error execute
+37 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
+37 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+37 error execute     at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)
+37 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)
+37 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
+37 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
+37 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
+37 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
+37 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
+37 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
+37 error execute   stack: 'Error: fatal: tag \'vundefined\' already exists\n\n    at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)\n    at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)\n    at Function.addTag (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:90:39)\n    at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:613:30)\n    at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)\n    at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)\n    at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13\n    at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)' }
