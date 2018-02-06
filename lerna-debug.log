@@ -12,46 +12,59 @@
 11 silly hasTags
 12 verbose hasTags true
 13 silly getLastTag
-14 verbose getLastTag v0.1.1
-15 info Comparing with v0.1.1.
-16 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
-17 silly diff plugin/errors.js
-17 silly diff plugin/package-lock.json
-17 silly diff plugin/package.json
-17 silly diff plugin/plugin.js
-17 silly diff plugin/plugin.test.js
-17 silly diff plugin/yarn-error.log
-18 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
-19 silly diff preprocessors/im/IMPreprocessor.js
-19 silly diff preprocessors/im/package.json
-20 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
-21 silly diff providers/mongoose/package.json
-22 silly diffSinceIn v0.1.1 /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
-23 silly diff storages/local-fs/package.json
-24 verbose updated attachments
-25 verbose updated attachments-preprocessor-im
-26 verbose updated attachments-provider-mongoose
-27 verbose updated attachments-storage-local-fs
-28 silly collectDependents
-29 silly isPackageDependentOf attachments attachments
-30 silly isPackageDependentOf attachments attachments-preprocessor-im
-31 silly isPackageDependentOf attachments attachments-provider-mongoose
-32 silly isPackageDependentOf attachments attachments-storage-local-fs
-33 silly isPackageDependentOf attachments-preprocessor-im attachments
-34 silly isPackageDependentOf attachments-preprocessor-im attachments-preprocessor-im
-35 silly isPackageDependentOf attachments-preprocessor-im attachments-provider-mongoose
-36 silly isPackageDependentOf attachments-preprocessor-im attachments-storage-local-fs
-37 silly isPackageDependentOf attachments-provider-mongoose attachments
-38 silly isPackageDependentOf attachments-provider-mongoose attachments-preprocessor-im
-39 silly isPackageDependentOf attachments-provider-mongoose attachments-provider-mongoose
-40 silly isPackageDependentOf attachments-provider-mongoose attachments-storage-local-fs
-41 silly isPackageDependentOf attachments-storage-local-fs attachments
-42 silly isPackageDependentOf attachments-storage-local-fs attachments-preprocessor-im
-43 silly isPackageDependentOf attachments-storage-local-fs attachments-provider-mongoose
-44 silly isPackageDependentOf attachments-storage-local-fs attachments-storage-local-fs
-45 silly collectUpdates
-46 verbose has filtered update attachments
-47 verbose has filtered update attachments-preprocessor-im
-48 verbose has filtered update attachments-provider-mongoose
-49 verbose has filtered update attachments-storage-local-fs
-50 verbose initialize exited early
+14 verbose getLastTag vundefined
+15 info Comparing with vundefined.
+16 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/plugin
+17 silly diff
+18 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/preprocessors/im
+19 silly diff
+20 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/providers/mongoose
+21 silly diff
+22 silly diffSinceIn vundefined /Users/khrykin/Developer/Node.js/ski-o/attachments/storages/local-fs
+23 silly diff
+24 silly collectDependents
+25 silly collectUpdates
+26 info No updated packages to publish.
+27 silly initialize success
+28 silly execute attempt
+29 silly isDetachedHead
+30 silly getCurrentBranch
+31 verbose getCurrentBranch master
+32 verbose isDetachedHead false
+33 silly addFile /Users/khrykin/Developer/Node.js/ski-o/attachments/lerna.json
+34 silly commit vundefined
+35 verbose commit [ 'commit', '-m', 'vundefined' ]
+36 error execute Error: On branch master
+36 error execute Changes not staged for commit:
+36 error execute 	modified:   lerna-debug.log
+36 error execute
+36 error execute no changes added to commit
+36 error execute
+36 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
+36 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+36 error execute     at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)
+36 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)
+36 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
+36 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
+36 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
+36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
+36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
+36 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
+36 error execute  callback with error
+36 error execute  { Error: On branch master
+36 error execute Changes not staged for commit:
+36 error execute 	modified:   lerna-debug.log
+36 error execute
+36 error execute no changes added to commit
+36 error execute
+36 error execute     at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)
+36 error execute     at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+36 error execute     at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)
+36 error execute     at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)
+36 error execute     at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)
+36 error execute     at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)
+36 error execute     at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)
+36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15
+36 error execute     at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13
+36 error execute     at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)
+36 error execute   stack: 'Error: On branch master\nChanges not staged for commit:\n\tmodified:   lerna-debug.log\n\nno changes added to commit\n\n    at Function.module.exports.sync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/execa/index.js:277:26)\n    at Function.execSync (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)\n    at Function.commit (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/GitUtilities.js:84:39)\n    at PublishCommand.gitCommitAndTagVersion (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:612:30)\n    at PublishCommand.commitAndTagUpdates (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:582:27)\n    at PublishCommand.execute (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:261:16)\n    at PublishCommand._attempt (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:289:21)\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:276:15\n    at /Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/Command.js:298:13\n    at PublishCommand.initialize (/Users/khrykin/Developer/Node.js/ski-o/attachments/node_modules/lerna/lib/commands/PublishCommand.js:220:9)' }
