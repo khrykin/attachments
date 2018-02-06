@@ -1,6 +1,6 @@
 {
   "name": "attachments-provider-mongoose",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Mongoose provider for attachments",
   "main": "MongooseProvider.js",
   "repository": "https://github.com/khrykin/attachments",
