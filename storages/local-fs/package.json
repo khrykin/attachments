@@ -1,6 +1,6 @@
 {
   "name": "attachments-storage-local-fs",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Local file system storage for attachments",
   "main": "LocalFsStorage.js",
   "repository": "https://github.com/khrykin/attachments",
