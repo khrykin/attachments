@@ -193,7 +193,7 @@ const plugin = createPlugin(provider, {
   }
 })
 
-// Then you finally aplly created plugin to your model:
+// Then you finally apply created plugin to your model:
 
 // Mongoose
 schema.plugin(plugin)
